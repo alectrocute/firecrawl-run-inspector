@@ -1,5 +1,3 @@
-// Just for now, but seriously, it would be really nice if the Node SDK was compatible with Bun and Cloudflare Workers.
-
 type FirecrawlScrapeResponse = {
   success?: boolean
   data?: unknown
