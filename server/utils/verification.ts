@@ -4,8 +4,8 @@
  * breaks, so we verify on boot and surface the result.
  */
 
-import { Firecrawl } from '@mendable/firecrawl-js'
 import type { VerificationStatus } from '~/types'
+import { scrapeWithFirecrawl } from './firecrawl'
 import { parseFailingActionIndex } from './instrument'
 
 let status: VerificationStatus = {
@@ -24,11 +24,9 @@ export async function verifyErrorFormat(): Promise<void> {
     return
   }
 
-  const fc = new Firecrawl({ apiKey })
-
   try {
     // Submit a sequence with a knowingly-broken selector
-    await fc.scrape('https://httpbin.org/forms/post', {
+    await scrapeWithFirecrawl(apiKey, 'https://httpbin.org/forms/post', {
       formats: ['html'],
       actions: [
         { type: 'click', selector: '#definitely-does-not-exist-xyz-123' },

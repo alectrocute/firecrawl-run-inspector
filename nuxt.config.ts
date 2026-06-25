@@ -7,6 +7,11 @@ export default defineNuxtConfig({
   tailwindcss: {
     configPath: '~/tailwind.config.ts',
   },
+  nitro: {
+    cloudflare: {
+      nodeCompat: true,
+    },
+  },
   app: {
     head: {
       title: 'Run Inspector — Firecrawl',

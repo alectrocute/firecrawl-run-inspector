@@ -14,11 +14,10 @@
  *     429 → exponential backoff (1s, 2s, 4s) → max 3 retries.
  */
 
-import { Firecrawl } from '@mendable/firecrawl-js'
-import type { ActionOption } from '@mendable/firecrawl-js'
 import { z } from 'zod'
 import { translate } from '#shared/utils/i18n'
 import { resolveApiKey, isAuthError } from '../utils/apiKey'
+import { scrapeWithFirecrawl } from '../utils/firecrawl'
 import { instrumentActions, toUserStep, parseFailingActionIndex } from '../utils/instrument'
 import { classifyActionError, diagnoseTransport } from '../utils/errors'
 import { withRetry } from '../utils/retry'
@@ -202,7 +201,6 @@ export default defineEventHandler(async (event) => {
 
   // ── Instrument & execute ────────────────────────────────────────────
 
-  const fc = new Firecrawl({ apiKey })
   const profile = `run-inspector-${Date.now()}`
   const plan = instrumentActions(userActions)
   const warnings: RunWarning[] = []
@@ -214,9 +212,9 @@ export default defineEventHandler(async (event) => {
 
     const { result, retries } = await withRetry(
       () =>
-        fc.scrape(url, {
+        scrapeWithFirecrawl(apiKey, url, {
           formats: ['html'],
-          actions: plan.actions as unknown as ActionOption[],
+          actions: plan.actions,
           profile: { name: profile, saveChanges: true },
           timeout,
         }),
@@ -285,9 +283,9 @@ export default defineEventHandler(async (event) => {
         const prefix = plan.actions.slice(0, rawIndex)
         if (prefix.length > 0) {
           const prefixStart = Date.now()
-          const prefixResult = await fc.scrape(url, {
+          const prefixResult = await scrapeWithFirecrawl(apiKey, url, {
             formats: ['html'],
-            actions: prefix as unknown as ActionOption[],
+            actions: prefix,
             profile: { name: profile, saveChanges: false },
             timeout: 30_000,
           })

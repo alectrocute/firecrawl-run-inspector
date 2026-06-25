@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "build:cloudflare": "nuxt build --preset=cloudflare_module",
+    "deploy": "npm run build:cloudflare && wrangler deploy",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@mendable/firecrawl-js": "^4.28.2",
     "@nuxtjs/tailwindcss": "^6.14.0",
     "cheerio": "^1.2.0",
     "nuxt": "^4.4.8",
@@ -23,6 +24,7 @@
     "@types/node": "^26.0.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.5"
+    "vue-tsc": "^3.3.5",
+    "wrangler": "^4.104.0"
   }
 }

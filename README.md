@@ -128,10 +128,10 @@ app/
 
 [Nuxt 4](https://nuxt.com) · [Vue 3](https://vuejs.org) · [Nitro](https://nitro.build) ·
 [Tailwind CSS](https://tailwindcss.com) · [Zod](https://zod.dev) ·
-[`@mendable/firecrawl-js`](https://www.npmjs.com/package/@mendable/firecrawl-js) ·
+Firecrawl HTTP API ·
 [Playwright](https://playwright.dev) · TypeScript
 
-The Firecrawl SDK runs **server-side only**, so your API key never reaches the browser bundle. All
+Firecrawl calls run **server-side only**, so your API key never reaches the browser bundle. All
 copy is centralized in `locales/en.json` and resolved through a tiny shared `$t()` helper.
 
 ## Testing
