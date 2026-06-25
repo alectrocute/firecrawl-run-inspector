@@ -1,0 +1,236 @@
+{
+  "app": {
+    "brand": "Firecrawl",
+    "productName": "Run Inspector"
+  },
+
+  "workbench": {
+    "inputPane": {
+      "label": "Input",
+      "subhead": "Give us a URL and a JSON <action>action sequence</action>, and we'll run it step by step."
+    },
+    "inspectPane": {
+      "label": "Inspect",
+      "emptyTitle": "Ready when you are",
+      "emptyDescription": "Set up a sequence on the left and hit run. You'll get a step-by-step timeline, a screenshot at every stop, and a clear answer if something breaks."
+    }
+  },
+
+  "apiKey": {
+    "label": "Your Firecrawl API key",
+    "placeholder": "fc-...",
+    "savedBadge": "Saved on this device",
+    "show": "Show",
+    "hide": "Hide",
+    "forget": "Forget"
+  },
+
+  "actionEditor": {
+    "urlLabel": "URL to inspect",
+    "urlPlaceholder": "https://example.com",
+    "actionsLabel": "Actions",
+    "actionsHint": "A JSON array · ⌘+Enter to run",
+    "actionsPlaceholder": "[{\"type\": \"click\", \"selector\": \".button\"}, ...]",
+    "runButton": "Run sequence",
+    "runningButton": "Running…",
+    "orShortcut": "or ⌘+Enter",
+    "fixErrors": "Fix the issues above to run",
+    "cancel": "Cancel"
+  },
+
+  "presets": {
+    "heading": "Try a preset",
+    "stepCount": "{count} steps",
+    "happyPath": {
+      "name": "The happy path: fill a form",
+      "description": "Open a form, fill in a field, and submit. Everything should sail through, green all the way."
+    },
+    "brokenSelector": {
+      "name": "A broken selector",
+      "description": "The same flow, but one step points at an element that isn't there. Watch exactly where it breaks — and why."
+    },
+    "multiStep": {
+      "name": "A multi-step journey",
+      "description": "Hop across a chain of pages, grabbing a screenshot at each stop, so you can see how state carries from one action to the next."
+    }
+  },
+
+  "runStatus": {
+    "idle": "Idle",
+    "running": "Running",
+    "passed": "Passed",
+    "failed": "Failed",
+    "error": "Error",
+    "detail": "{count} steps · {time}"
+  },
+
+  "runningIndicator": {
+    "heading": "Running your sequence…",
+    "elapsed": "{elapsed}s in · usually done within ~{total}s",
+    "stages": [
+      "Spinning up a headless browser",
+      "Heading to your URL",
+      "Working through your actions",
+      "Snapping a screenshot at each step",
+      "Reading the page and pulling out content",
+      "Wrapping up — almost there"
+    ]
+  },
+
+  "timeline": {
+    "heading": "Timeline",
+    "stepLabel": "Step {n}",
+    "failedBanner": "Hit a snag at step {failed} of {total}",
+    "successBanner": "All {count} steps passed — nicely done",
+    "emptyBanner": "Finished, but nothing came back",
+    "emptyBannerDetail": "Every action ran to completion, but there were no screenshots or data to show for it.",
+    "totalTime": "Total time: {time}",
+    "stepQueued": "{count} step{plural} up next…",
+    "noSteps": "Nothing to show yet",
+    "noStepsDetail": "Add a few actions and run to see the timeline.",
+    "apiTimeoutDetail": "API-level timeout (60s) — the whole scrape call ran out of time. Try trimming a few actions or pointing at a page that loads faster.",
+    "waitTimeoutDetail": "Step-level timeout — try giving this step a few more milliseconds to settle.",
+    "retryWaited": "waited {time}",
+
+    "status": {
+      "FAILED": "FAILED",
+      "RUNNING": "RUNNING",
+      "EMPTY": "EMPTY",
+      "PENDING": "PENDING"
+    },
+
+    "screenshot": {
+      "afterStep": "Page after this step",
+      "lastPageState": "The last page we saw",
+      "initialState": "Where it all started",
+      "clickToExpand": "Click to enlarge",
+      "altAfterStep": "Screenshot after step {n}",
+      "altInitialState": "Initial page state",
+      "altExpanded": "Expanded screenshot"
+    },
+
+    "mismatchWarning": "The screenshot counts don't quite line up — a few may be missing."
+  },
+
+  "failureDetail": {
+    "heading": "What went wrong",
+    "errorClassification": "Error type",
+
+    "classification": {
+      "selector_not_found": "Selector not found",
+      "wait_timeout": "Wait timeout",
+      "navigation_timeout": "Navigation timeout",
+      "api_timeout": "API timeout (60s)",
+      "rate_limited": "Rate limited (429)",
+      "blocked": "Blocked / captcha",
+      "empty_result": "Empty result",
+      "unknown": "Unknown error"
+    },
+
+    "category": {
+      "network": "Network error",
+      "api": "API error",
+      "sdk": "SDK error",
+      "validation": "Validation error"
+    },
+
+    "advice": {
+      "selector_not_found": "We couldn't find that element on the page. Double-check the selector, see whether the element only shows up under certain conditions, or confirm the page layout hasn't changed.",
+      "wait_timeout": "A wait or action on this step ran out of time. Try giving it a few more milliseconds to settle.",
+      "navigation_timeout": "The page took too long to load. Make sure the URL is right and that it loads within a reasonable window.",
+      "api_timeout": "The whole scrape reached the 60-second limit. Try trimming a few actions, or point it at a page that loads faster.",
+      "rate_limited": "Firecrawl is asking you to slow down for a moment. Give it a little time before trying again, or check the limits on your plan.",
+      "blocked": "Something blocked the request — most likely a CAPTCHA or bot protection on the site.",
+      "empty_result": "The action finished, but nothing came back. The content you're after may be missing, hidden, or loaded in a different way.",
+      "unknown": "Something unexpected happened. The raw error below should have the details."
+    },
+
+    "retryAttempts": "Retries",
+    "attempt": "Attempt {n}",
+
+    "lastGoodScreenshot": {
+      "label": "The moment before it broke",
+      "caption": "Here's how the page looked just before the action that failed.",
+      "alt": "Page state just before the failing step"
+    },
+
+    "failingAction": "The action that failed",
+    "copyJson": "Copy JSON",
+    "rawError": "Raw error"
+  },
+
+  "transportErrors": {
+    "network": {
+      "title": "We couldn't reach Firecrawl",
+      "hint": "Looks like a connection hiccup — check your network, or see whether Firecrawl is having a moment."
+    },
+    "api": {
+      "title": "Firecrawl ran into an error",
+      "hint": "Your request made it through, but the API sent back an error."
+    },
+    "sdk": {
+      "title": "Something unexpected happened"
+    },
+    "cancelled": "Run cancelled — no harm done."
+  },
+
+  "validation": {
+    "urlEmpty": "Add a URL to get started",
+    "urlInvalid": "That doesn't look like a valid URL — try something like https://example.com",
+    "actionsNotArray": "Actions need to be a JSON array, wrapped in [ ]",
+    "actionsEmpty": "Add at least one action to run",
+    "actionNotObject": "Action {n} should be an object",
+    "actionMissingType": "Action {n} is missing its \"type\"",
+    "actionInvalidType": "Action {n} has an unknown type \"{type}\". Try one of: {types}",
+    "invalidJson": "That JSON isn't quite right",
+    "invalidJsonDetail": "That JSON isn't quite right ({detail}): {msg}"
+  },
+
+  "warnings": {
+    "heading": "Heads up ({count})",
+    "rateLimited": "Slowed down by rate limits — {count} {retries}",
+    "screenshot_count_mismatch": "We expected {expected} screenshots but got {actual}. A few may be missing or doubled up.",
+    "partial_results": "We couldn't reach Firecrawl, so this timeline is our best guess based on when the request went out. Screenshots and timing data aren't available this time.",
+    "empty_sequence": "The sequence finished, but came back empty — no screenshots, no content. The page may have loaded without the elements you were expecting.",
+    "prefix_timing_mismatch": "The replay took {prefixDuration} instead of the expected ~{expectedMs}, so the page state may differ a little from the original failure."
+  },
+
+  "actionLabels": {
+    "wait": "Wait {ms}ms",
+    "click": "Click \"{selector}\"",
+    "screenshot": "Screenshot",
+    "screenshotFullPage": "Screenshot (full page)",
+    "write": "Type \"{text}\"",
+    "press": "Press \"{key}\"",
+    "scroll": "Scroll {direction}",
+    "scrape": "Scrape content",
+    "executeJavascript": "JS: {script}"
+  },
+
+  "ui": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "loading": "Loading",
+    "copySelector": "Copy selector: {selector}",
+    "copyRawResponse": "Copy raw response"
+  },
+
+  "apiErrors": {
+    "missingKey": {
+      "statusMessage": "API key needed",
+      "message": "We need a Firecrawl API key to run this. Pop yours into the form, or set one up on the server."
+    },
+    "invalidKey": {
+      "statusMessage": "API key not accepted",
+      "message": "Firecrawl didn't accept that API key. Give it another look and make sure it's the right one."
+    },
+    "validation": {
+      "statusMessage": "Something needs fixing"
+    }
+  },
+
+  "sectionLabels": {
+    "input": "Input",
+    "inspect": "Inspect"
+  }
+}
