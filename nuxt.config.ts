@@ -28,5 +28,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     apiKey: process.env.FIRECRAWL_API_KEY,
+    firecrawlApiUrl: process.env.FIRECRAWL_API_URL || 'https://api.firecrawl.dev',
+    public: {
+      hasServerApiKey: Boolean(process.env.FIRECRAWL_API_KEY),
+    },
   },
 })

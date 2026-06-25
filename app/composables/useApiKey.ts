@@ -10,6 +10,7 @@ const STORAGE_KEY = 'firecrawl_api_key'
 export function useApiKey() {
   const apiKey = useState<string>('fc-api-key', () => '')
   const savedKey = useState<string>('fc-api-key-saved', () => '')
+  const config = useRuntimeConfig()
 
   // Hydrate from localStorage once, on the client.
   if (import.meta.client && savedKey.value === '') {
@@ -22,6 +23,9 @@ export function useApiKey() {
 
   const isSaved = computed(
     () => savedKey.value !== '' && savedKey.value === apiKey.value.trim(),
+  )
+  const hasApiKey = computed(
+    () => Boolean(config.public.hasServerApiKey) || apiKey.value.trim() !== '',
   )
 
   /** Persist the current key to localStorage. Call only after a successful request. */
@@ -46,5 +50,5 @@ export function useApiKey() {
     return key ? { 'x-firecrawl-api-key': key } : {}
   }
 
-  return { apiKey, isSaved, persist, forget, authHeaders }
+  return { apiKey, isSaved, hasApiKey, persist, forget, authHeaders }
 }

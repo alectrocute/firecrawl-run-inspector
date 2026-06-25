@@ -34,6 +34,7 @@
     "runButton": "Run sequence",
     "runningButton": "Running…",
     "orShortcut": "or ⌘+Enter",
+    "missingApiKey": "Add a Firecrawl API key to run",
     "fixErrors": "Fix the issues above to run",
     "cancel": "Cancel"
   },

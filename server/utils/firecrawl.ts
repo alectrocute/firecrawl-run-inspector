@@ -8,8 +8,6 @@ type FirecrawlScrapeOptions = Record<string, unknown> & {
   timeout?: number
 }
 
-const FIRECRAWL_API_URL = 'https://api.firecrawl.dev'
-
 async function readFirecrawlResponse(response: Response): Promise<FirecrawlScrapeResponse> {
   try {
     return await response.json() as FirecrawlScrapeResponse
@@ -26,9 +24,10 @@ export async function scrapeWithFirecrawl(
   const controller = new AbortController()
   const timeoutMs = typeof options.timeout === 'number' ? options.timeout + 5_000 : 65_000
   const timeout = setTimeout(() => controller.abort(), timeoutMs)
+  const firecrawlApiUrl = useRuntimeConfig().firecrawlApiUrl.replace(/\/+$/, '')
 
   try {
-    const response = await fetch(`${FIRECRAWL_API_URL}/v2/scrape`, {
+    const response = await fetch(`${firecrawlApiUrl}/v2/scrape`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,

@@ -76,6 +76,7 @@ Open **http://localhost:3000**, paste your key (or rely on the `.env` one), pick
 | Variable | Required | Description |
 | --- | --- | --- |
 | `FIRECRAWL_API_KEY` | Optional | Server-side fallback key. A key entered in the UI (sent via the `x-firecrawl-api-key` header) always takes precedence. |
+| `FIRECRAWL_API_URL` | Optional | Firecrawl API base URL. Defaults to `https://api.firecrawl.dev`. |
 
 ## How it works
 

@@ -9,6 +9,7 @@ const {
   failingStep,
   lastGoodScreenshotUrl,
   hasResult,
+  rawJson,
   statusTone,
   statusDetail,
   errorView,
@@ -17,7 +18,7 @@ const {
   cancel,
 } = useRunInspector()
 
-const { apiKey, isSaved: saved, forget } = useApiKey()
+const { apiKey, isSaved: saved, hasApiKey, forget } = useApiKey()
 
 const timelineRef = ref<InstanceType<typeof ActionTimeline> | null>(null)
 
@@ -39,7 +40,6 @@ const subheadParts = computed(() => {
   }
 })
 
-const rawJson = computed(() => (result.value ? JSON.stringify(result.value, null, 2) : ''))
 const { warning: verifyWarning, dismissed: verifyDismissed, dismiss: dismissVerifyWarning } =
   useVerificationWarning()
 </script>
@@ -83,7 +83,14 @@ const { warning: verifyWarning, dismissed: verifyDismissed, dismiss: dismissVeri
         <ClientOnly>
           <ApiKeyField v-model="apiKey" :saved @forget="forget" />
         </ClientOnly>
-        <ActionEditor :isRunning :validationErrors :pendingActions @run="run" @cancel="cancel" />
+        <ActionEditor
+          :isRunning
+          :validationErrors
+          :pendingActions
+          :has-api-key="hasApiKey"
+          @run="run"
+          @cancel="cancel"
+        />
       </WorkbenchPane>
 
       <!-- RIGHT · inspect -->

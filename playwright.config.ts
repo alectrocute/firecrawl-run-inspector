@@ -22,6 +22,9 @@ export default defineConfig({
 
   webServer: {
     command: 'npx nuxt dev',
+    env: {
+      FIRECRAWL_API_KEY: 'fc-playwright-server-key',
+    },
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,

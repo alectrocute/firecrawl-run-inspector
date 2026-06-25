@@ -3,6 +3,7 @@ import type { UserAction, ValidationError } from '~/types'
 
 const props = defineProps<{
   isRunning: boolean
+  hasApiKey: boolean
   validationErrors?: ValidationError[] | null
 }>()
 
@@ -35,8 +36,10 @@ const { url, actionsJson, jsonError, applyPreset, validate } = useActionForm()
 const hasError = computed(
   () => jsonError.value !== null || (props.validationErrors?.length ?? 0) > 0,
 )
+const canSubmit = computed(() => !props.isRunning && !hasError.value && props.hasApiKey)
 
 function submit() {
+  if (props.isRunning || !props.hasApiKey) return
   const payload = validate()
   if (payload) emit('run', payload)
 }
@@ -111,11 +114,11 @@ function onKeydown(e: KeyboardEvent) {
 
     <!-- Run / Cancel -->
     <div class="mb-8 flex items-center gap-3">
-      <UiButton :disabled="isRunning || hasError" @click="submit">
+      <UiButton :disabled="!canSubmit" @click="submit">
         <UiSpinner v-if="isRunning" size="sm" />
         <UiIcon v-else name="play" class="h-3.5 w-3.5" />
         {{ isRunning ? $t('actionEditor.runningButton') : $t('actionEditor.runButton') }}
-        <UiIcon v-if="!isRunning && !hasError" name="arrowRight" class="h-3.5 w-3.5 text-flame-200" />
+        <UiIcon v-if="canSubmit" name="arrowRight" class="h-3.5 w-3.5 text-flame-200" />
       </UiButton>
       <UiButton
         v-if="isRunning && showCancel"
@@ -125,6 +128,7 @@ function onKeydown(e: KeyboardEvent) {
         <UiIcon name="x" class="h-3.5 w-3.5" />
         {{ $t('actionEditor.cancel') }}
       </UiButton>
+      <span v-else-if="!hasApiKey" class="text-xs text-red-400">{{ $t('actionEditor.missingApiKey') }}</span>
       <span v-else-if="!hasError" class="text-xs text-ash-600">{{ $t('actionEditor.orShortcut') }}</span>
       <span v-else class="text-xs text-red-400">{{ $t('actionEditor.fixErrors') }}</span>
     </div>

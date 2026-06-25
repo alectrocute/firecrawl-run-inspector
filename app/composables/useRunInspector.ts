@@ -44,6 +44,7 @@ export function useRunInspector() {
   const isValidationError = computed(() => errorCategory.value === 'validation')
 
   const hasResult = computed(() => result.value !== null && !isRunning.value)
+  const rawJson = computed(() => (result.value ? JSON.stringify(result.value, null, 2) : ''))
 
   /** High-level run state surfaced in the inspect header. */
   const statusTone = computed<RunStatusTone>(() => {
@@ -168,6 +169,7 @@ export function useRunInspector() {
     failingStep,
     lastGoodScreenshotUrl,
     hasResult,
+    rawJson,
     statusTone,
     statusDetail,
     errorView,
