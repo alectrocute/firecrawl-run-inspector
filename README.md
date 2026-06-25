@@ -2,10 +2,9 @@
 
 # 🔥 Firecrawl Run Inspector
 
-### See exactly what happened inside every Firecrawl Scrape.
+### See exactly what happened inside every Firecrawl Scrape run.
 
-A step-by-step timeline with screenshots, timing, and plain-English failure attribution —
-so when a multi-step scrape breaks, you know which step, why, and what the page looked like at that moment.
+A step-by-step timeline with screenshots, timing, and plain-English failure attribution so when a multi-step scrape breaks, you know which step, why and what the page looked like at that moment.
 
 [![Built with Firecrawl](https://img.shields.io/badge/Built%20with-Firecrawl-FF7A00?style=for-the-badge)](https://www.firecrawl.dev)
 [![Nuxt 4](https://img.shields.io/badge/Nuxt-4-00DC82?style=for-the-badge&logo=nuxtdotjs&logoColor=white)](https://nuxt.com)
@@ -18,7 +17,7 @@ so when a multi-step scrape breaks, you know which step, why, and what the page 
 
 ---
 
-## Why we built this
+## Why?
 
 Production scraping workflows are opaque. When a 14-step action sequence fails, you get a single
 `SCRAPE_FAILED` and no context. Which step broke? Was it a bad selector, or did the page change?
@@ -29,7 +28,7 @@ Paste a URL and an actions array, hit run, and it instruments the execution with
 screenshots and timing — then hands back a timeline with failure attribution and a clear
 explanation of what went wrong.
 
-It's open source so you can run it locally, drop it into your own internal tools, or use it as a
+It's open source so you can run it locally, drop it into your own internal tools or use it as a
 reference for building on the Firecrawl SDK.
 
 ## Features
@@ -48,7 +47,7 @@ reference for building on the Firecrawl SDK.
   results are flagged instead of silently swallowed.
 - **Bring your own key** — paste a Firecrawl API key (kept in your browser's local storage, sent
   per-request) or configure one server-side. The key never gets baked into the client bundle.
-- **⌨Built for speed** — JSON editor with `⌘/Ctrl + Enter` to run, inline validation, three ready
+- **Built for speed** — JSON editor with `⌘/Ctrl + Enter` to run, inline validation, three ready
   presets, and cancelable runs.
 
 ## Quick start
