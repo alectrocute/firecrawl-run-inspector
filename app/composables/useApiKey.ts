@@ -12,13 +12,20 @@ export function useApiKey() {
   const savedKey = useState<string>('fc-api-key-saved', () => '')
   const config = useRuntimeConfig()
 
-  // Hydrate from localStorage once, on the client.
-  if (import.meta.client && savedKey.value === '') {
-    const stored = window.localStorage.getItem(STORAGE_KEY) ?? ''
-    if (stored) {
-      savedKey.value = stored
-      if (!apiKey.value) apiKey.value = stored
-    }
+  // Hydrate from localStorage once, on the client. This runs in `onMounted`
+  // (not during setup) so the first client render matches the server-rendered
+  // markup — otherwise the key-gated Run button is hydrated as `disabled` and
+  // never gets patched back to enabled. Mutating state after mount triggers a
+  // proper reactive update that re-enables it.
+  if (import.meta.client && getCurrentInstance()) {
+    onMounted(() => {
+      if (savedKey.value !== '') return
+      const stored = window.localStorage.getItem(STORAGE_KEY) ?? ''
+      if (stored) {
+        savedKey.value = stored
+        if (!apiKey.value) apiKey.value = stored
+      }
+    })
   }
 
   const isSaved = computed(
